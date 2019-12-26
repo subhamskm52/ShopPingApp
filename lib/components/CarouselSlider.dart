@@ -16,23 +16,23 @@ class _carouselSliderState extends State<carouselSlider> {
         boxFit: BoxFit.cover,
         images: [
           Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkm2MJTb5ROpaIOspg1GtVHUQ46xHZV__sAqIbanTnPWWoUDSDkA&s",
+            "https://static.dezeen.com/uploads/2019/10/circulose-recycled-cotton-clothing-sustainable-fashion-stockholm-sweden_hero-a.jpg",
             fit: BoxFit.cover,
           ),
           Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxeKygOqSjhwx5C52Y9q30HSyZVM9l5vtf1T_bEtE3QuwcIye9&s",
+            "https://images-eu.ssl-images-amazon.com/images/G/31/img19/Fashion/WA19/CLOTHING._CB1198675309_.jpg",
             fit: BoxFit.cover,
           ),
           Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSwG42flSEc9b1YJ8gsXXqBede3JbMoVrNJpRaLNsNlMjI2jlw&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsmoGRHYCaX0RaBv0sypvMnufibOtxctQ4Mxc4CVNTpKh_xihX&s",
             fit: BoxFit.cover,
           ),
           Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMggF1jtqzNkTqyJ8OR7L1jw1CaUuFnhB3YWFi4OY5yAFNojDCQA&s",
+            "https://cdn.cnn.com/cnnnext/dam/assets/130425151718-zooey-deschanel-august-2012-story-top.jpg",
             fit: BoxFit.cover,
           ),
           Image.network(
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRakjhJ6KUggHrNx8mcYFofY3svcoZGvCLsctrPnADDCdhxfT1JNQ&s",
+            "https://allstarbio.com/wp-content/uploads/2018/08/Maddie-Ziegler.jpg",
             fit: BoxFit.cover,
           ),
         ],
