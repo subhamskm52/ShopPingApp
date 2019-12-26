@@ -37,9 +37,6 @@ class ProductDetails extends StatelessWidget {
               })
         ],
       ),
-      drawer: Drawer(
-        child: DrawerList(),
-      ),
       body: ListView(
         scrollDirection: Axis.vertical,
         children: <Widget>[

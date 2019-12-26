@@ -6,15 +6,20 @@ import '../components/ProductGridView.dart';
 import '../UI/Cart.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
+  MyHomePage(this.id, this.username, this.email, this.photoUrl,
+      {Key key, this.title}) : super(key: key);
+  final String id;
+  final String username;
+  final String email;
+  final String photoUrl;
   final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       drawer: Drawer(
-        child: DrawerList(),
+        child: DrawerList(
+            widget.id, widget.username, widget.email, widget.photoUrl),
       ),
       body: Center(
         child: ListView(

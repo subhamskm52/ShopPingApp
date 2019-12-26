@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class DrawerList extends StatelessWidget {
+
+  String id;
+  String username;
+  String email;
+  String photoUrl;
+
+
+  DrawerList(this.id, this.username, this.email, this.photoUrl);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -8,8 +17,8 @@ class DrawerList extends StatelessWidget {
         children: <Widget>[
           //user info drawer
           UserAccountsDrawerHeader(
-            accountName: Text("shubham"),
-            accountEmail: Text("oggy@gmail.com"),
+            accountName: Text(username == null ? "username" : username),
+            accountEmail: Text(email == null ? "email@email.com" : email),
             currentAccountPicture: GestureDetector(
               onTap: () {
                 print("profile pic is tapped");
@@ -17,7 +26,9 @@ class DrawerList extends StatelessWidget {
               child: CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.black,
-                  child: Icon(Icons.person)),
+                  backgroundImage: NetworkImage(photoUrl == null
+                      ? "https://i.stack.imgur.com/34AD2.jpg"
+                      : photoUrl)),
             ),
             decoration: BoxDecoration(color: Colors.deepPurple),
           ),
