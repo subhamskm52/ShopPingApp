@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "648957207488",
+    "firebase_url": "https://stopshop-1.firebaseio.com",
+    "project_id": "stopshop-1",
+    "storage_bucket": "stopshop-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648957207488:android:8dd6722817a91b1ac85e25",
+        "android_client_info": {
+          "package_name": "com.oggy.feed_seed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648957207488-09v7cgk8485upe7i21fb5t6bv9r7qj6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9HKld2xXId-oKYdDv06Wh5HV_vQFP0G0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648957207488-09v7cgk8485upe7i21fb5t6bv9r7qj6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
