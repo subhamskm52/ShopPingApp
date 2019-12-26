@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class HorizontalListView extends StatelessWidget {
   Widget getCategory(String imgLoc, String imgName, Function onTap) {
     return Container(
+      color: Colors.white70,
       padding: EdgeInsets.symmetric(horizontal: 8),
       width: 150,
       child: FlatButton(
@@ -14,7 +15,7 @@ class HorizontalListView extends StatelessWidget {
             Text(
               imgName,
               style: TextStyle(
-                color: Colors.red.shade700,
+                color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),

@@ -20,13 +20,14 @@ class _ProductGridViewState extends State<ProductGridView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white70,
       child: GridView.builder(
           scrollDirection: Axis.vertical,
           physics: ScrollPhysics(),
           shrinkWrap: true,
           itemCount: prodList.length,
           gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           itemBuilder: (BuildContext context, index) {
             return ProductCard(prodList[index]["name"],

@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.blueGrey.shade700,
         centerTitle: true,
         title: Text(widget.title),
         actions: <Widget>[
@@ -53,37 +53,47 @@ class _MyHomePageState extends State<MyHomePage> {
         child: DrawerList(
             widget.id, widget.username, widget.email, widget.photoUrl),
       ),
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            carouselSlider(),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "Categories",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.red.shade900),
-              ),
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: new Image.asset(
+              'images/linkin.png',
+              fit: BoxFit.fill,
             ),
-            HorizontalListView(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "Recent Products",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.red.shade900),
-              ),
+          ),
+          Center(
+            child: ListView(
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: <Widget>[
+                carouselSlider(),
+                SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    "Categories",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.redAccent),
+                  ),
+                ),
+                HorizontalListView(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    "Recent Products",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.redAccent),
+                  ),
+                ),
+                ProductGridView(),
+              ],
             ),
-            ProductGridView(),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

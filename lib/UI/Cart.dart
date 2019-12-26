@@ -12,7 +12,7 @@ class _MyCartState extends State<MyCart> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.blueGrey.shade700,
           centerTitle: true,
           title: Text("Cart"),
           actions: <Widget>[
