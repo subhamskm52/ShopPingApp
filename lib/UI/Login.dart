@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   bool isLoggedIn = false;
   bool loading = false;
   SharedPreferences preferences;
@@ -20,52 +21,35 @@ class _LoginPageState extends State<LoginPage> {
   String email;
   String photoUrl;
 
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      isSignedIn();
-    });
-    setState(() {
-      isLoggedIn;
-    });
+  void isSignedIn() async {
+    isLoggedIn = await googleSignIn.isSignedIn();
     if (isLoggedIn == true) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MyHomePage(
-                    id,
-                    username,
-                    email,
-                    photoUrl,
-                    title: "Shop Stop",
-              )
-          )
-      );
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) =>
+              MyHomePage(id,
+                username,
+                email,
+                photoUrl,
+                title: "Shop Stop",)));
     }
   }
 
-  Future<bool> isSignedIn() async {
-    isLoggedIn = await googleSignIn.isSignedIn();
-    return isLoggedIn;
-  }
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   signInWithGoogle() async {
     try {
       await googleSignIn.signIn();
       GoogleSignInAccount googleSignInAccount = googleSignIn.currentUser;
       GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
+      await googleSignInAccount.authentication;
 
       AuthCredential authCredential = GoogleAuthProvider.getCredential(
           idToken: googleSignInAuthentication.idToken,
           accessToken: googleSignInAuthentication.accessToken);
       AuthResult authResult =
-          await firebaseAuth.signInWithCredential(authCredential);
+      await firebaseAuth.signInWithCredential(authCredential);
       FirebaseUser user = authResult.user;
       assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);
@@ -89,15 +73,55 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  Widget _signInButton() {
+    return SignInButton(
+      Buttons.Google,
+      text: "Sign in with Google",
+      onPressed: () async {
+        await signInWithGoogle();
+        if (isLoggedIn) {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MyHomePage(
+                          id, username, email, photoUrl,
+                          title: "Stop Shop")));
+        } else {
+          Fluttertoast.showToast(msg: "Login Failed ! please try again");
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    isSignedIn();
+//    if (isLoggedIn == true) {
+//      Navigator.pushReplacement(
+//          context,
+//          MaterialPageRoute(
+//              builder: (context) => MyHomePage(
+//                    id,
+//                    username,
+//                    email,
+//                    photoUrl,
+//                    title: "Shop Stop",
+//              )
+//          )
+//      );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage("images/linkinPark.jpg"),
-          fit: BoxFit.cover,
-        )),
+              image: AssetImage("images/linkinPark.jpg"),
+              fit: BoxFit.cover,
+            )),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -111,26 +135,6 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _signInButton() {
-    return SignInButton(
-      Buttons.Google,
-      text: "Sign in with Google",
-      onPressed: () async {
-        await signInWithGoogle();
-        if (isLoggedIn) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MyHomePage(
-                      id, username, email, photoUrl,
-                      title: "Stop Shop")));
-        } else {
-          Fluttertoast.showToast(msg: "Login Failed ! please try again");
-        }
-      },
     );
   }
 }
