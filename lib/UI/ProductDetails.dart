@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'DrawerList.dart';
+
 
 class ProductDetails extends StatelessWidget {
   final String prodName;

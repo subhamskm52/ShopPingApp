@@ -98,19 +98,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     isSignedIn();
-//    if (isLoggedIn == true) {
-//      Navigator.pushReplacement(
-//          context,
-//          MaterialPageRoute(
-//              builder: (context) => MyHomePage(
-//                    id,
-//                    username,
-//                    email,
-//                    photoUrl,
-//                    title: "Shop Stop",
-//              )
-//          )
-//      );
   }
 
   @override

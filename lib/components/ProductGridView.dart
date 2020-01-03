@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../UI/ProductDetails.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProductGridView extends StatefulWidget {
   @override
@@ -7,19 +8,22 @@ class ProductGridView extends StatefulWidget {
 }
 
 class _ProductGridViewState extends State<ProductGridView> {
-  dynamic prodList = [
-    {"name": "shirt", "price": "20"},
-    {"name": "pants", "price": "20"},
-    {"name": "t-shirt", "price": "20"},
-    {"name": "shorts", "price": "20"},
-    {"name": "boots", "price": "20"},
-    {"name": "shirt", "price": "20"},
-    {"name": "shirt", "price": "20"}
-  ];
+
+  dynamic prodList;
+
+  getData() async {
+    QuerySnapshot temp = await Firestore.instance.collection("products")
+        .getDocuments();
+    setState(() {
+      prodList = temp.documents;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    getData();
+    return prodList == null ? Center(
+        child: CircularProgressIndicator(strokeWidth: 0.5,)) : Container(
       color: Colors.white70,
       child: GridView.builder(
           scrollDirection: Axis.vertical,
