@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'SearchPage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'Login.dart';
 
 class DrawerList extends StatelessWidget {
 
@@ -32,7 +36,6 @@ class DrawerList extends StatelessWidget {
             ),
             decoration: BoxDecoration(color: Colors.deepPurple),
           ),
-
           //drawer body
           ListTile(
             onTap: () {
@@ -40,6 +43,14 @@ class DrawerList extends StatelessWidget {
             },
             title: Text("Home Page"),
             leading: Icon(Icons.home),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchPage()));
+            },
+            title: Text("Search"),
+            leading: Icon(Icons.search),
           ),
           ListTile(
             onTap: () {
@@ -99,6 +110,23 @@ class DrawerList extends StatelessWidget {
             leading: Icon(Icons.error),
             onTap: () {
               print("about is tapped");
+            },
+          ),
+          ListTile(
+            title: Text("Log Out"),
+            leading: Icon(Icons.arrow_forward_ios),
+            onTap: () async
+            {
+              bool signedIn = true;
+              GoogleSignIn g = GoogleSignIn();
+              await g.signOut();
+              signedIn = await g.isSignedIn();
+              if (signedIn) {
+                Fluttertoast.showToast(msg: "something wrong");
+                return;
+              }
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => LoginPage()));
             },
           )
         ],

@@ -1,3 +1,4 @@
+import 'package:feed_seed/UI/SearchPage.dart';
 import 'package:flutter/material.dart';
 import 'DrawerList.dart';
 import '../components/CarouselSlider.dart';
@@ -13,6 +14,7 @@ class MyHomePage extends StatefulWidget {
   final String email;
   final String photoUrl;
   final String title;
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -29,14 +31,16 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.white70,
-                size: 25,
-              ),
-              onPressed: () {
-                print("search button clicked");
-              }),
+            icon: Icon(
+              Icons.search,
+              color: Colors.white70,
+              size: 25,
+            ),
+            onPressed: () {
+              Navigator.of(context).push(
+                  new MaterialPageRoute(builder: (context) => SearchPage()));
+            },
+          ),
           IconButton(
               icon: Icon(
                 Icons.shopping_cart,
@@ -55,12 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Stack(
         children: <Widget>[
-          Center(
-            child: new Image.asset(
-              'images/linkin.png',
-              fit: BoxFit.fill,
-            ),
-          ),
           Center(
             child: ListView(
               shrinkWrap: true,

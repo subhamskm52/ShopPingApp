@@ -27,8 +27,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    isSignedIn();
-    if (isLoggedIn) {
+    setState(() {
+      isSignedIn();
+    });
+    setState(() {
+      isLoggedIn;
+    });
+    if (isLoggedIn == true) {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -38,12 +43,15 @@ class _LoginPageState extends State<LoginPage> {
                     email,
                     photoUrl,
                     title: "Shop Stop",
-                  )));
+              )
+          )
+      );
     }
   }
 
-  void isSignedIn() async {
+  Future<bool> isSignedIn() async {
     isLoggedIn = await googleSignIn.isSignedIn();
+    return isLoggedIn;
   }
 
   signInWithGoogle() async {

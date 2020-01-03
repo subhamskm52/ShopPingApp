@@ -38,7 +38,7 @@ class _MyCartState extends State<MyCart> {
         ),
         body: Column(),
         bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Colors.blueGrey.shade700,
             currentIndex: 0,
             items: [
               BottomNavigationBarItem(
