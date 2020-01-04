@@ -24,12 +24,13 @@ class _LoginPageState extends State<LoginPage> {
   void isSignedIn() async {
     isLoggedIn = await googleSignIn.isSignedIn();
     if (isLoggedIn == true) {
+      preferences = await SharedPreferences.getInstance();
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) =>
-              MyHomePage(id,
-                username,
-                email,
-                photoUrl,
+              MyHomePage(preferences.get("id"),
+                preferences.get("username"),
+                preferences.get("email"),
+                preferences.get("photoUrl"),
                 title: "Shop Stop",)));
     }
   }
@@ -57,16 +58,18 @@ class _LoginPageState extends State<LoginPage> {
       final FirebaseUser currentUser = await firebaseAuth.currentUser();
       assert(user.uid == currentUser.uid);
       preferences = await SharedPreferences.getInstance();
-      preferences.setString("id", user.uid);
-      preferences.setString("username", user.displayName);
-      preferences.setString("email", user.email);
-      preferences.setString("photoUrl", user.photoUrl);
-      id = user.uid;
-      username = user.displayName;
-      email = user.email;
-      photoUrl = user.photoUrl;
-      isLoggedIn = true;
-      print('signInWithGoogle succeeded: $user');
+      setState(() {
+        preferences.setString("id", user.uid);
+        preferences.setString("username", user.displayName);
+        preferences.setString("email", user.email);
+        preferences.setString("photoUrl", user.photoUrl);
+        id = preferences.get("id");
+        username = preferences.get("username");
+        email = preferences.get("email");
+        photoUrl = preferences.get("photoUrl");
+        isLoggedIn = true;
+      });
+
     } catch (error) {
       print("error in logging in");
       isLoggedIn = false;
