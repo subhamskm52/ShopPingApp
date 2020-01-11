@@ -40,6 +40,9 @@ class _LoginPageState extends State<LoginPage> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   signInWithGoogle() async {
+    setState(() {
+      loading = true;
+    });
     try {
       await googleSignIn.signIn();
       GoogleSignInAccount googleSignInAccount = googleSignIn.currentUser;
@@ -69,15 +72,18 @@ class _LoginPageState extends State<LoginPage> {
         photoUrl = preferences.get("photoUrl");
         isLoggedIn = true;
       });
-
     } catch (error) {
       print("error in logging in");
-      isLoggedIn = false;
+      setState(() {
+        isLoggedIn = false;
+        loading = false;
+      });
     }
   }
 
   Widget _signInButton() {
-    return SignInButton(
+    return loading == true ? CircularProgressIndicator(
+      backgroundColor: Colors.white,) : SignInButton(
       Buttons.Google,
       text: "Sign in with Google",
       onPressed: () async {

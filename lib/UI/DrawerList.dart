@@ -3,6 +3,7 @@ import 'SearchPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'Login.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerList extends StatelessWidget {
 
@@ -87,6 +88,12 @@ class DrawerList extends StatelessWidget {
               color: Colors.red,
             ),
           ),
+          ListTile(
+            title: Text("NIT STORE"),
+            leading: Icon(Icons.store),
+            onTap: () => _launchUrl("http://nitstore.herokuapp.com/"),
+
+          ),
           SizedBox(
             height: 10,
           ),
@@ -132,5 +139,14 @@ class DrawerList extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _launchUrl(String url) async {
+    try {
+      await launch(url);
+    } catch (e) {
+      print(e);
+      Fluttertoast.showToast(msg: "Something Wrong");
+    }
   }
 }

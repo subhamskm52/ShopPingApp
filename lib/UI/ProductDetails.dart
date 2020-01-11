@@ -1,21 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+class ProductDetails extends StatefulWidget {
 
-class ProductDetails extends StatelessWidget {
   final String prodName;
   final String price;
   final String imgUrl;
 
-  ProductDetails(this.prodName, this.price, this.imgUrl);
+  @override
+  _ProductDetailsState createState() => _ProductDetailsState();
 
+  ProductDetails(this.prodName, this.price, this.imgUrl);
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    debugDescribeChildren();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.redAccent,
         centerTitle: true,
-        title: Text(prodName),
+        title: Text(widget.prodName),
         actions: <Widget>[
           IconButton(
               icon: Icon(
@@ -42,7 +49,7 @@ class ProductDetails extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 300,
-            child: Image.asset(imgUrl),
+            child: Image.asset(widget.imgUrl),
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -55,14 +62,14 @@ class ProductDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text(
-                    prodName,
+                    widget.prodName,
                     style: TextStyle(fontSize: 30, color: Colors.red),
                   ),
                   SizedBox(
                     width: 20,
                   ),
                   Text(
-                    "\$$price",
+                    "\$" + widget.price,
                     style: TextStyle(fontSize: 30, color: Colors.red),
                   )
                 ],
@@ -101,7 +108,7 @@ class ProductDetails extends StatelessWidget {
               ),
               child: MaterialButton(
                 onPressed: () {
-                  print("buy is pressed");
+                  addToCart();
                 },
                 child: Text(
                   "BUY",
@@ -118,5 +125,23 @@ class ProductDetails extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  addToCart() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    Firestore firestore = Firestore.instance;
+    var prod = firestore.collection("cart")
+        .document(preferences.get("email"))
+        .collection("addedToCart")
+        .document();
+    Map<String, String> products = {
+      'name': widget.prodName,
+      'price': widget.price,
+      'id': prod.documentID
+    };
+    prod.setData(products);
+
+    Fluttertoast.showToast(msg: "ProductAdded");
   }
 }
